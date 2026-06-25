@@ -115,9 +115,16 @@ class TestTrendQueryService:
         assert result == "192.168.1.10:9100"
     
     def test_build_tcp_query(self, service):
-        """测试 TCP 溢出查询语句构建"""
+        """测试 TCP 连接数查询语句构建"""
         instance = "192.168.1.10:9100"
         query = service._build_tcp_query(instance)
+        assert "Tcp_CurrEstab" in query
+        assert instance in query
+    
+    def test_build_tcp_overflow_query(self, service):
+        """测试 TCP 溢出查询语句构建"""
+        instance = "192.168.1.10:9100"
+        query = service._build_tcp_overflow_query(instance)
         assert "Tcp_ListenOverflows" in query
         assert instance in query
 
