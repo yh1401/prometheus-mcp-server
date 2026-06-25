@@ -93,8 +93,8 @@ class TrendQueryService:
         return f'node_load1{{instance="{instance}"}}'
     
     def _build_tcp_query(self, instance: str) -> str:
-        """构建 TCP 连接数查询"""
-        return f'node_netstat_Tcp_CurrEstab{{instance="{instance}"}}'
+        """构建 TCP 溢出查询"""
+        return f'node_netstat_Tcp_ListenOverflows{{instance="{instance}"}}'
     
     async def query_trend(self, node: str, ip: str, 
                          start_time: str, end_time: str, 
@@ -108,7 +108,7 @@ class TrendQueryService:
                    f"start={start_time}, end={end_time}, step={step}")
         
         # 并行查询所有指标趋势
-        cpu_trend, memory_trend, disk_io_trend, load_trend, tcp_trend = await asyncio.gather(
+        cpu_trend, memory_trend, disk_io_trend, load_trend, tcp_overflow_trend = await asyncio.gather(
             self._query_range(self._build_cpu_query(instance), start, end, step),
             self._query_range(self._build_memory_query(instance), start, end, step),
             self._query_range(self._build_disk_io_query(instance), start, end, step),
@@ -128,7 +128,7 @@ class TrendQueryService:
             memory_trend=memory_trend,
             disk_io_trend=disk_io_trend,
             load_trend=load_trend,
-            tcp_trend=tcp_trend
+            tcp_overflow_trend=tcp_overflow_trend
         )
     
     async def query_specific_metric_trend(

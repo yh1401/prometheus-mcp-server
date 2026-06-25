@@ -113,6 +113,13 @@ class TestTrendQueryService:
         """测试 instance 标签构建"""
         result = service._get_instance_label("192.168.1.10")
         assert result == "192.168.1.10:9100"
+    
+    def test_build_tcp_query(self, service):
+        """测试 TCP 溢出查询语句构建"""
+        instance = "192.168.1.10:9100"
+        query = service._build_tcp_query(instance)
+        assert "Tcp_ListenOverflows" in query
+        assert instance in query
 
 
 class TestAPIRoutes:

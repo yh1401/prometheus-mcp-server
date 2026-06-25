@@ -91,7 +91,7 @@ async def get_trend_metrics(
     - 内存使用率趋势
     - 磁盘 IO 趋势
     - 系统负载趋势
-    - TCP 连接趋势
+    - TCP 溢出趋势（ListenOverflows）
     """
     try:
         result = await trend_query_service.query_trend(

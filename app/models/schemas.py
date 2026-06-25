@@ -105,7 +105,7 @@ class TrendMetricsResponse(BaseModel):
     memory_trend: List[TimeSeriesPoint] = Field(..., description="内存使用率趋势")
     disk_io_trend: List[TimeSeriesPoint] = Field(..., description="磁盘 IO 趋势")
     load_trend: List[TimeSeriesPoint] = Field(..., description="系统负载趋势")
-    tcp_trend: List[TimeSeriesPoint] = Field(..., description="TCP 连接趋势")
+    tcp_overflow_trend: List[TimeSeriesPoint] = Field(..., description="TCP 溢出趋势（ListenOverflows）")
 
 
 class ErrorResponse(BaseModel):
