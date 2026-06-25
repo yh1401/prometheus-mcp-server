@@ -1,7 +1,7 @@
 """API 路由."""
 
 from fastapi import APIRouter, Query, HTTPException, Depends
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 
 from app.models.schemas import (
