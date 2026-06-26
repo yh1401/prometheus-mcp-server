@@ -16,6 +16,10 @@ class Settings(BaseSettings):
     api_port: int = 8000
     api_host: str = "0.0.0.0"
     
+    # MCP 配置
+    mcp_port: int = 8001
+    mcp_host: str = "0.0.0.0"
+    
     # 查询配置
     default_step: str = "1m"
     realtime_cache_ttl: int = 30  # 实时数据缓存时间（秒）
